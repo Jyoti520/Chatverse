@@ -1,10 +1,8 @@
-<div align="center">
 
 # Real-Time Chat Application
 
 A full-stack real-time messaging system built to demonstrate WebSocket-based architecture, secure authentication, and scalable backend design.
 
-</div>
 
 ---
 
@@ -95,7 +93,6 @@ chat-app/
     ├── middleware/
     ├── models/
     ├── routes/
-    └── sockets/
 ```
 
 ---
