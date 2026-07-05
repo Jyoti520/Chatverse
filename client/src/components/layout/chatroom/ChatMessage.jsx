@@ -2,8 +2,8 @@ import Message from "./Message";
 import ScrollView from "../../common/ScrollView";
 import { useAuth } from "../../../hooks/useAuth";
 
-function ChatMessage({ messages }) {
-  const {loggeduser}= useAuth();
+function ChatMessage({ messages, search }) {
+  const { loggeduser } = useAuth();
 
   return (
     <ScrollView dependency={messages}>
@@ -13,7 +13,14 @@ function ChatMessage({ messages }) {
           const showName =
             !prevMessage || prevMessage.sender?._id !== msg.sender?._id;
 
-          return <Message key={msg?._id} showName={showName} message={msg} />;
+          return (
+            <Message
+              key={msg?._id}
+              showName={showName}
+              message={msg}
+              search={search}
+            />
+          );
         })
       ) : (
         <div className="flex h-full items-center justify-center">

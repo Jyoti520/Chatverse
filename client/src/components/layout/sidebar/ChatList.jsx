@@ -1,5 +1,6 @@
 import { useAuth } from "../../../hooks/useAuth";
 import { useSocket } from "../../../hooks/useSocket";
+import { formattedTime, formatUserName } from "../../../utils/format";
 
 function ChatList({ chat, index, handleChat }) {
   const { onlineUsers } = useSocket();
@@ -50,23 +51,11 @@ function ChatList({ chat, index, handleChat }) {
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-6 justify-between">
                 <h2 className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-200">
-                  {chatName?.charAt(0).toUpperCase() + chatName?.slice(1) ||
-                    "Deleted user"}
+                  {formatUserName(chatName)}
                 </h2>
 
                 <p className="text-xs whitespace-nowrap text-slate-500 dark:text-slate-400">
-                  {latestMessage?.createdAt
-                    ? new Date(latestMessage?.createdAt).toLocaleTimeString(
-                        [],
-                        {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        },
-                      )
-                    : new Date().toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                  { formattedTime(latestMessage?.createdAt)}
                 </p>
                 {chat.unreadMsgCount > 0 && !isSenderMessage && (
                   <span className="absolute right-2 bottom-3 h-5 w-5 px-1.5 text-[11px] min-w-[20px] rounded-full bg-indigo-500 flex items-center justify-center text-white dark:bg-indigo-500/80 font-medium">

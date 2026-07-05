@@ -14,6 +14,7 @@ function Input({ children, label, type = "text", className = "", ...props }) {
         </label>
       )}
       <input
+        autoFocus
         type={type}
         className={`w-full max-w-full text-sm sm:text-base px-4 py-1 text-slate-800 dark:text-slate-200 outline-none focus:outline-none placeholder:text-slate-500 bg-transparent dark:placeholder:text-slate-500 transition-all duration-300 ${className}`}
         {...props}

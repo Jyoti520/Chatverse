@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Loader from "../../common/Loader";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
@@ -7,18 +7,23 @@ import { useChat } from "../../../hooks/useChat";
 import { useSocket } from "../../../hooks/useSocket";
 import { useAuth } from "../../../hooks/useAuth";
 import { useMessage } from "../../../hooks/useMessage";
-
+import { filterMessages } from "../../../utils/search";
 
 const ChatBox = ({ activePage, goToBack }) => {
   const { socket } = useSocket();
   const { loggeduser } = useAuth();
   const { selectedChat } = useChat();
   const { messages, loading } = useMessage();
+  const [search, setSearch] = useState("");
   const [typing, setTyping] = useState(false);
 
   const chatMessages = selectedChat?._id
     ? messages[selectedChat._id] || []
     : [];
+
+  const filteredMessages = useMemo(() => {
+    return filterMessages(chatMessages, search);
+  }, [chatMessages, search]);
 
   const typingTimeout = useRef(null);
   // typing event handling
@@ -74,13 +79,13 @@ const ChatBox = ({ activePage, goToBack }) => {
         activePage === "chatbox" ? "flex" : "hidden md:flex"
       }`}
     >
-      <ChatHeader goToBack={goToBack} />
+      <ChatHeader goToBack={goToBack} search={search} setSearch={setSearch} />
 
       <div className="px-4 py-5 flex-1 overflow-y-auto min-h-0">
         {loading ? (
           <Loader textColor={"text-indigo-500"} />
         ) : (
-          <ChatMessage messages={chatMessages} />
+          <ChatMessage messages={filteredMessages} search={search} />
         )}
       </div>
 

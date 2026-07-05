@@ -5,6 +5,7 @@ import Loader from "../../common/Loader";
 import Input from "../../common/Input";
 import { useChat } from "../../../hooks/useChat";
 import { useUser } from "../../../hooks/useUser";
+import { filterUsers } from "../../../utils/search";
 
 function Contacts() {
   const { createChat, chatLoad, chatErr } = useChat();
@@ -19,14 +20,9 @@ function Contacts() {
   useEffect(() => {
     fetchUsers();
   }, []);
- 
+
   const filteredUsers = useMemo(() => {
-    if (!search.trim()) {
-      return users;
-    }
-    return users.filter((user) =>
-      user.username.toLowerCase().includes(search.toLowerCase()),
-    );
+    return filterUsers(users, search);
   }, [users, search]);
 
   return (
