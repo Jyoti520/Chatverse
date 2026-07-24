@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Bell } from "lucide-react";
 import SettingSection from "./SettingSection";
 import ToggleSwitch from "../../../common/ToggleSwitch";
+
 function Notification() {
+  
   const [notification, setNotification] = useState({
     email: true,
     push: false,

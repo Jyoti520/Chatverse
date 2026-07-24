@@ -15,7 +15,7 @@ function Security() {
       />
 
       <div className="mt-4">
-        <button className="border-2 border-gray-600/20 px-6 py-2 text-gray-700 dark:text-gray-100 hover:text-gray-100 hover:bg-indigo-500 hover:outline-2 w-full font-medium  transition duration-300 rounded sm:w-auto text-sm">
+        <button className="border-2 border-slate-600/20 px-6 py-2 text-slate-700 dark:text-slate-100 hover:text-slate-100 hover:bg-indigo-500 hover:outline-2 w-full font-medium transition-all duration-200 rounded sm:w-auto text-sm">
           Change Password
         </button>
       </div>

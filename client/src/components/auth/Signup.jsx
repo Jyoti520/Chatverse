@@ -48,7 +48,7 @@ function Signup({ setPage }) {
     const fieldErrors = isValidate(name, value);
 
     setErrors((prev) => ({ ...prev, [name]: fieldErrors[name] || null }));
-     if (signupErr) clearAuthErr();
+    if (signupErr) clearAuthErr();
   };
 
   const handleSubmit = async (e) => {
@@ -66,12 +66,12 @@ function Signup({ setPage }) {
 
     try {
       setLoading(true);
-      const {email, password}=formData;
+      const { email, password } = formData;
       const result = await signupUser(formData);
       // auto-login the account
-      if(result){
-        const success= await loginUser(email, password);
-        if(success) navigate("/chats");
+      if (result) {
+        const success = await loginUser(email, password);
+        if (success) navigate("/chats");
       }
       
     } finally {
@@ -79,107 +79,141 @@ function Signup({ setPage }) {
     }
   };
 
-
-   const inputStyles = (field) =>
-    `px-4 py-3 rounded-xl bg-white/40 dark:bg-white/[0.03] border backdrop-blur-xl  ${
+  const inputStyles = (field) =>
+    `px-4 py-3 rounded-lg bg-white/40 dark:bg-white/[0.03] border backdrop-blur-xl  ${
       errors[field]
-        ? "border border-red-400/70 dark:border-red-500/40 bg-red-50/50 dark:bg-red-500/[0.03] focus:ring-4 focus:ring-red-500/10"
-        : "border-white/30 dark:border-white/10 hover:border-blue-300/70 dark:hover:border-blue-400/20  focus:border-blue-400 dark:focus:border-blue-500/30 focus:ring-2 focus:ring-blue-500/40"
+        ? "border border-red-400/70 dark:border-red-500/40 bg-red-50/50 dark:bg-red-500/[0.03] focus:ring-2 focus:ring-red-500/10"
+        : "border-slate-300 dark:border-white/[0.09] hover:border-blue-300/70 dark:hover:border-indigo-500/30 focus:border-indigo-500 dark:focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10"
     }`;
 
   return (
-    <>
-      <div className="px-4 pt-2 py-4 sm:px-2">
-        <form
-          className="flex flex-col justify-center gap-3"
-          onSubmit={handleSubmit}
-        >
-          <Input
-            label="Username:"
-            value={formData.username}
-            name="username"
-            placeholder="Enter your username"
-            onChange={handleChange}
-            className={inputStyles("username")}
-          />
-          <div className="min-h-[20px] px-1 flex items-center">
-          {errors.username && (
-            <p className="text-sm font-medium text-red-500 dark:text-red-400">{errors.username}</p>
-          )}
-          </div>
-          <Input
-            label="Email:"
-            name="email"
-            type="email"
-            value={formData.email}
-            placeholder="Enter your email"
-            onChange={handleChange}
-            className={inputStyles("email")}
-          />
-          <div className="min-h-[20px] px-1 flex items-center">
-          {errors.email && (
-            <p className="text-sm font-medium dark:text-red-400 text-red-500">{errors.email}</p>
-          )}
-          </div>
-          <Input
-            label="Password: "
-            name="password"
-            type={"password"}
-            value={formData.password}
-            placeholder="Enter your password"
-            onChange={handleChange}
-            className={inputStyles("password")}
-          />
-          <div className="min-h-[20px] px-1 flex items-center">
-          {errors.password && (
-            <p className="text-sm font-medium dark:text-red-400 text-red-500">{errors.password}</p>
-          )}
-          </div>
-          <Input
-            label="Confirm Password: "
-            name="confirmPassword"
-            type={"password"}
-            value={formData.confirmPassword}
-            placeholder="Enter your password"
-            onChange={handleChange}
-            className={inputStyles("confirmPassword")}
-          />
-          <div className="min-h-[20px] px-1 flex items-center">
-          {errors.confirmPassword && (
-            <p className="text-sm font-medium dark:text-red-400 text-red-500">{errors.confirmPassword}</p>
-          )}
-          </div>
-          <Button
-            type="submit"
-            className={`w-full px-3 py-2.5 uppercase rounded-2xl font-medium text-sm sm:text-base text-white  ${
-              isLoading
-                ? "bg-slate-400 cursor-not-allowed "
-                : "bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400 hover:scale-[1.01] active:scale-95 cursor-pointer shadow-lg shadow-indigo-500/20"
-            } `}
-            title="Signup to your account"
-            disabled={isLoading}
-          >
-            {isLoading ? "Signing in..." : "Signup"}
-          </Button>
-        </form>
-         {/* Footer */}
-        <p className="mt-4 text-center text-slate-700 dark:text-slate-300 text-sm sm:text-base">
-          Already have a account?&nbsp;
-          <button
-            onClick={setPage}
-            className="ml-2 font-medium hover:underline text-indigo-500 text-sm sm:text-base transition"
-          >
-            Login
-          </button>
-        </p>
-
-        {signupErr && (
-          <p className="mt-3 px-4 py-3 rounded-2xl text-red-500 bg-red-500/5 font-medium text-center text-xs sm:text-sm border border-red-500/40 backdrop-blur-xl">
-            {signupErr}
+    <form
+      className="flex flex-col justify-center gap-1"
+      onSubmit={handleSubmit}
+    >
+      <Input
+        label="Username:"
+        value={formData.username}
+        name="username"
+        placeholder="Enter your username"
+        onChange={handleChange}
+        className={inputStyles("username")}
+      />
+      <div className="min-h-[20px] px-1">
+        {errors.username && (
+          <p className="text-xs font-medium text-red-500 dark:text-red-400">
+            {errors.username}
           </p>
         )}
       </div>
-    </>
+      <Input
+        label="Email:"
+        name="email"
+        type="email"
+        value={formData.email}
+        placeholder="Enter your email"
+        onChange={handleChange}
+        className={inputStyles("email")}
+      />
+      <div className="min-h-[20px] px-1">
+        {errors.email && (
+          <p className="text-xs font-medium dark:text-red-400 text-red-500">
+            {errors.email}
+          </p>
+        )}
+      </div>
+      <Input
+        label="Password: "
+        name="password"
+        type={"password"}
+        value={formData.password}
+        placeholder="••••••••"
+        onChange={handleChange}
+        className={inputStyles("password")}
+      />
+      <div className="min-h-[20px] px-1">
+        {errors.password && (
+          <p className="text-xs font-medium dark:text-red-400 text-red-500">
+            {errors.password}
+          </p>
+        )}
+      </div>
+      <Input
+        label="Confirm Password: "
+        name="confirmPassword"
+        type={"password"}
+        value={formData.confirmPassword}
+        placeholder="••••••••"
+        onChange={handleChange}
+        className={inputStyles("confirmPassword")}
+      />
+      <div className="min-h-[20px] px-1">
+        {errors.confirmPassword && (
+          <p className="text-xs font-medium dark:text-red-400 text-red-500">
+            {errors.confirmPassword}
+          </p>
+        )}
+      </div>
+      {/* Server error */}
+      {signupErr && (
+        <div className="flex items-start gap-2 rounded-lg border border-red-400/30 dark:border-red-500/20 bg-red-50 dark:bg-red-500/\\\[0.05] px-3.5 py-2.5">
+          <span className="mt-0.5 text-red-500 text-sm leading-none">⚠</span>
+          <p className="text-xs sm:text-sm font-medium text-red-600 dark:text-red-400 leading-relaxed">
+            {signupErr}
+          </p>
+        </div>
+      )}
+      {/* Submit */}
+      <Button
+        type="submit"
+        disabled={isLoading}
+        title="Create your account"
+        className={`w-full py-3 rounded-xl text-sm sm:text-base font-medium text-white transition-all duration-200 ${
+          isLoading
+            ? "bg-slate-400 dark:bg-slate-600 cursor-not-allowed"
+            : "bg-gradient-to-tr from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-500 active:scale-[0.98] cursor-pointer"
+        }`}
+      >
+        {isLoading ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg
+              className="h-4 w-4 animate-spin"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              />
+            </svg>
+            Creating account…
+          </span>
+        ) : (
+          "Create account"
+        )}
+      </Button>
+      {/* Footer */}
+      {/* Switch to login */}
+      <p className="mt-3 text-center text-base text-slate-500 dark:text-slate-400">
+        Already have an account?{" "}
+        <button
+          type="button"
+          onClick={setPage}
+          className="font-medium ml-1 text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-500 transition-colors duration-200"
+        >
+          Sign in
+        </button>
+      </p>
+    </form>
   );
 }
 

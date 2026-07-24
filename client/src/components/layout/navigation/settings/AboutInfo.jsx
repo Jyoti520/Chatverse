@@ -16,7 +16,7 @@ function AboutInfo() {
         <li>Your feedback helps improve the app.</li>
       </Accordian>
       <Accordian title="Contact info">
-        <li className="flex gap-2 items-center text-gray-700 dark:text-gray-300">
+        <li className="flex gap-2 items-center text-slate-700 dark:text-slate-300">
           <i className="bi bi-github"></i>
           <a
             href="http://github.com/Jyoti520"

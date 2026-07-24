@@ -1,40 +1,31 @@
-function SettingSection({ icon: Icon, title, children }) {
+function SettingSection({ icon: Icon, title, description, action, children }) {
   return (
-    <section
-      className="w-full min-w-0 rounded-2xl bg-white/60
-         dark:bg-white/[0.03] border border-white/10
-       backdrop-blur-xl shadow-sm dark:shadow-none overflow-hidden p-4 transition-all duration-300"
-    >
+    <section className="w-full min-w-0 overflow-hidden rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm shadow-slate-900/5 transition-shadow duration-200 dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20">
       {/* Header */}
-      <div
-        className="
-           flex items-center gap-3
-           mb-4 pb-3
-           border-b
-           border-indigo-200/70
-           dark:border-blue-500/20
-           min-w-0
-         "
-      >
-        <div
-          className="w-11 h-11 shrink-0 flex justify-start items-center gap-3 p-3 rounded-2xl bg-gradient-to-br
-             from-indigo-500/10
-             via-blue-500/10
-             to-cyan-400/10
-             dark:from-indigo-500/15
-             dark:via-blue-500/15
-             dark:to-cyan-400/15 min-w-0 text-indigo-400 font-medium"
-        >
-          <Icon size={20} className="text-indigo-500 dark:text-indigo-300" />
+      <div className="mb-4 flex min-w-0 items-start justify-between gap-3 border-b border-slate-100 pb-3 dark:border-white/5">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-500/10 sm:h-10 sm:w-10">
+            <Icon size={17} className="text-indigo-600 dark:text-indigo-400" />
           </div>
-          <h2 className="truncate text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">
-            {title}
-          </h2>
+          <div className="min-w-0">
+            <h2 className="truncate text-sm font-semibold text-slate-700 dark:text-slate-200 sm:text-base">
+              {title}
+            </h2>
+            {description && (
+              <p className="truncate text-xs text-slate-400 dark:text-slate-500">
+                {description}
+              </p>
+            )}
           </div>
-        <div className="w-full min-w-0">{children}</div>
+        </div>
+
+        {action && <div className="shrink-0">{action}</div>}
+      </div>
+
+      {/* Content */}
+      <div className="w-full min-w-0">{children}</div>
     </section>
   );
 }
 
 export default SettingSection;
-

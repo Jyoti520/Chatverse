@@ -1,3 +1,7 @@
+@import "@fontsource/geist/400.css";
+@import "@fontsource/geist/500.css";
+@import "@fontsource/space-grotesk/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,14 +12,12 @@ html:host {
   
 }
 body {
-  @apply font-poppins !important;
+  @apply font-sans;
   overflow-x: hidden;
 }
-/* .bg-secondary{
-  
-} */
+
 .logo{
-  font-family:'Poppins';
+  font-family:'Space Grotesk';
 }
 
 .scroll-hide::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Settings, X } from "lucide-react";
 import Logout from "../../../auth/Logout";
 import AboutInfo from "./AboutInfo";
 import ProfileSection from "./ProfileSection";
@@ -8,15 +8,16 @@ import Security from "./Security"
 import Avatar from "../../../common/Avatar";
 import {useAuth} from "../../../../hooks/useAuth"
 
-function Settings() {
+function Setting() {
   const [openSettings, setOpenSettings] = useState(false);
   const {loggeduser} =useAuth();
 
   return (
     <>
       <button
-        className="group flex items-center justify-center text-center font-semibold rounded-2xl hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10 shadow-sm shadow-slate-300/80 dark:shadow-none hover:scale-[1.03] active:scale-95 transition-all duration-300 cursor-pointer"
+        className="relative flex justify-center items-center h-8 w-8 sm:w-10 sm:h-10 mx-auto bg-white hover:bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-700 dark:text-slate-200  shadow-sm shadow-slate-200/70 dark:shadow-none transition-all hover:scale-[1.03] active:scale-95 duration-150 text-center font-medium rounded-xl"
         onClick={() => setOpenSettings(true)}
+        aria-label="Open Settings"
       >
         {/* Avatar */}
         <Avatar>
@@ -39,7 +40,7 @@ function Settings() {
       <div className="flex gap-4 justify-between">
         <h2 className="text-slate-700 dark:text-slate-200 text-xl">Settings</h2>
         <button
-          className="absolute right-4 top-4 text-red-500 dark:text-red-400 px-1 py-2 transition-all duration-300 cursor-pointer"
+          className="absolute right-4 top-4 text-red-500 dark:text-red-400 px-1 py-2 transition-all duration-200 cursor-pointer active:scale-95"
           onClick={() => setOpenSettings(false)}
         >
           <X />
@@ -58,4 +59,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export default Setting;

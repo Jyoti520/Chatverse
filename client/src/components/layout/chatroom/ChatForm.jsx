@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SendHorizontal,  } from "lucide-react";
+import { SendHorizonalIcon, SendHorizontal } from "lucide-react";
 import Input from "../../common/Input";
 import { toast } from "react-toastify";
 import { useChat } from "../../../hooks/useChat";
@@ -13,11 +13,11 @@ function ChatForm({ typing, handleTyping }) {
   //send message response
   const handleNewMessage = async (e) => {
     e.preventDefault();
-   // console.log("message send");
+    // console.log("message send");
     if (!newMessage) return;
     try {
-       await sendMessage(newMessage, selectedChat._id);
-      //console.log(data.sendMsg ? "Message send" : "Failed to send a message");
+      await sendMessage(newMessage, selectedChat._id);
+      
     } catch (error) {
       console.error("Failed to send message");
     }
@@ -29,38 +29,39 @@ function ChatForm({ typing, handleTyping }) {
     handleTyping();
   };
   return (
-    <div className="relative w-full px-4 py-3"> 
-     {typing && (
-              <span className="absolute -top-4 p-2 left-8 text-xs text-emerald-700 dark:text-emerald-400 z-10 transition-all ease-in-out font-medium">
-                typing<span className="animate-bounce size-2">...</span>
-              </span>
-              
-            )}
+    <div className="relative w-full px-4 py-3">
+      {typing && (
+        <div className="absolute -top-7 left-8 flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-medium text-emerald-600 shadow-sm shadow-slate-900/5 dark:bg-slate-800 dark:text-emerald-400 dark:shadow-black/20">
+          Typing
+          <span className="flex gap-0.5">
+            <span className="h-1 w-1 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.2s]" />
+            <span className="h-1 w-1 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.1s]" />
+            <span className="h-1 w-1 animate-bounce rounded-full bg-emerald-500" />
+          </span>
+        </div>
+      )}
       <form
-        className="w-full px-3 py-2 flex justify-center gap-3 items-center bg-white/90 dark:bg-slate-900/40 border-2 border-white/30 dark:border-white/10 rounded-2xl backdrop-blur-2xl shadow-xl shadow-indigo-500/30 dark:shadow-none focus-within:border-indigo-300 dark:focus-within:border-indigo-500/30
-        focus-within:shadow-indigo-500/30 transition-all duration-300"
+        className="flex w-full items-center gap-2 px-4 py-2 shadow-sm shadow-slate-900/5 transition-all duration-200 focus-within:border-indigo-300 focus-within:shadow-md focus-within:shadow-indigo-500/10  dark:shadow-black/20 dark:focus-within:border-indigo-500/40"
         onSubmit={handleNewMessage}
-      >  
-       
+      >
         <Input
-          className="flex-1 min-w-0 px-2 py-3 text-[15px] bg-transparent outline-none placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium border-none"
+          className="flex-1 min-w-0 px-6 py-3 text-base bg-slate-200 dark:bg-white/[0.04] placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-indigo-500/60 dark:focus:ring-indigo-500/30  transition-all font-medium border-none rounded-2xl backdrop-blur-lg"
           placeholder="Type your message..."
           onChange={handleChange}
           value={newMessage}
           required
+          autofocus
         />
         <button
-          className={`flex h-11 w-11 cursor-pointer justify-center items-center rounded-2xl transition-all duration-300 ${
+          className={`flex h-11 w-11 shrink-0 cursor-pointer justify-center items-center rounded-xl transition-all duration-200 ${
             newMessage.trim()
-              ? "bg-gradient-to-br from-indigo-500 to-blue-500 text-white hover:scale-[1.03] active:scale-95 shadow-md shadow-indigo-500/20"
-              : "bg-slate-100 text-slate-400 dark:text-slate-500 dark:bg-white/[0.04] cursor-not-allowed"
+              ? "bg-gradient-to-br from-indigo-600 to-blue-500 text-white active:scale-95 shadow-sm hover:shadow-indigo-500/30"
+              : "bg-slate-200 text-slate-400 dark:text-slate-600 dark:bg-white/[0.04] cursor-not-allowed"
           }`}
           type="submit"
           disabled={!newMessage.trim()}
         >
-            <SendHorizontal
-              size={20}
-            />
+          <SendHorizonalIcon size={17} />
         </button>
       </form>
     </div>

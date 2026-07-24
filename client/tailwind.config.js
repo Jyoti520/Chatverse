@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
        fontFamily: {
-        inter: ["Inter", "sans-serif"], // add Inter
-        poppins:["Poppins", "sans-serif"]
+        logo:["Space Grotesk", "sans-serif"],
+        sans:["Geist", "sans-serif"]
       },
     },
   },

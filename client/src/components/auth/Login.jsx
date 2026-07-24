@@ -61,17 +61,16 @@ function Login({ setPage }) {
   };
 
   const inputStyles = (field) =>
-    `px-4 py-3 rounded-xl bg-white/40 dark:bg-white/[0.03] border backdrop-blur-xl  ${
+    `px-4 py-3 rounded-lg bg-white/20 dark:bg-white/[0.03] border backdrop-blur-xl transition-all duration-200 ${
       errors[field]
-        ? "border border-red-400/70 dark:border-red-500/40 bg-red-50/50 dark:bg-red-500/[0.03] focus:ring-4 focus:ring-red-500/10"
-        : "border-white/30 dark:border-white/10 hover:border-blue-300/70 dark:hover:border-blue-400/20  focus:border-blue-400 dark:focus:border-blue-500/30 focus:ring-2 focus:ring-blue-500/40"
+        ? "border-red-400/70 dark:border-red-500/40 bg-red-50/50 dark:bg-red-500/[0.03] focus:ring-2 focus:ring-red-500/10"
+        : "border-slate-300 dark:border-white/[0.09] hover:border-indigo-300/70 dark:hover:border-indigo-500/30 focus:border-indigo-500 dark:focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20"
     }`;
 
   return (
-    <>
-      <div className="px-4 pt-2 py-4 sm:px-2">
+  
         <form
-          className="flex flex-col justify-center gap-3"
+          className="flex flex-col justify-center gap-4"
           onSubmit={handleSubmit}
         >
           <div>
@@ -85,9 +84,9 @@ function Login({ setPage }) {
               onChange={handleChange}
               className={inputStyles("email")}
             />
-            <div className="min-h-[20px] px-1 flex items-center">
+            <div className="min-h-[20px] mt-1 px-1">
               {errors.email && (
-                <p className="text-sm font-medium text-red-500 dark:text-red-400">
+                <p className="text-xs font-medium text-red-500 dark:text-red-400">
                   {errors.email}
                 </p>
               )}
@@ -103,49 +102,66 @@ function Login({ setPage }) {
               value={credentials.password}
               required={true}
               onChange={handleChange}
-              placeholder="Enter your password"
+              placeholder="••••••••"
               className={inputStyles("password")}
             />
             <div className="min-h-[20px] px-1 flex items-center">
               {errors.password && (
-                <p className="text-sm font-medium text-red-500 dark:text-red-400">
+                <p className="text-xs font-medium text-red-500 dark:text-red-400">
                   {errors.password}
                 </p>
               )}
             </div>
           </div>
-
-          <Button
-            type="submit"
-            className={`w-full px-3 py-2.5 uppercase rounded-2xl font-medium text-sm sm:text-base text-white ${
-              isLoading
-                ? "bg-slate-400 cursor-not-allowed"
-                : "bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400 hover:scale-[1.01] active:scale-95 cursor-pointer shadow-lg shadow-indigo-500/20"
-            } `}
-            disabled={isLoading}
-            title="Login to your account"
-            aria-busy={isLoading}
-          >
-            {isLoading ? "logging in..." : "login"}
-          </Button>
-        </form>
-
-        <p className="mt-4 text-center text-slate-700 dark:text-slate-300 text-sm sm:text-base">
-          Don't have any account?&nbsp;
-          <button
-            className="ml-2 font-medium hover:underline text-indigo-500 text-sm sm:text-base transition"
-            onClick={setPage}
-          >
-            Signup
-          </button>
-        </p>
-        {loginErr && (
-          <p className="mt-3 px-4 py-3 rounded-2xl text-red-500 bg-red-500/5 font-medium text-center text-xs sm:text-sm border border-red-500/30 backdrop-blur-xl">
+          {/* Server error */}
+      {loginErr && (
+        <div className="flex items-start gap-2 rounded-lg border border-red-400/30 dark:border-red-500/20 bg-red-50 dark:bg-red-500/[0.05] px-3.5 py-2.5">
+          <span className="mt-0.5 text-red-500 text-sm leading-none">⚠</span>
+          <p className="text-xs font-medium text-red-600 dark:text-red-400 leading-relaxed">
             {loginErr}
           </p>
+        </div>
+      )}
+
+        <Button
+        type="submit"
+        disabled={isLoading}
+        aria-busy={isLoading}
+        title="Sign in to your account"
+        className={`mt-1 w-full py-2.5 rounded-xl text-sm sm:text-base font-medium text-white tracking-wide transition-all duration-200 ${
+          isLoading
+            ? "bg-slate-400 dark:bg-slate-600 cursor-not-allowed"
+            : "bg-gradient-to-tr from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 active:scale-[0.98] cursor-pointer shadow-indigo-500/20"
+        }`}
+      >
+        {isLoading ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+            </svg>
+            Signing in…
+          </span>
+        ) : (
+          "Sign in"
         )}
-      </div>
-    </>
+      </Button>
+
+       
+
+        {/* Switch to signup */}
+      <p className="text-center  text-sm sm:text-base text-slate-600 dark:text-slate-400">
+        Don't have an account?{" "}
+        <button
+          type="button"
+          onClick={setPage}
+          className="ml-1 font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-500 transition-colors duration-200"
+        >
+          Create one
+        </button>
+      </p>
+
+     </form>
   );
 }
 

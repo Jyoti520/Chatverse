@@ -66,16 +66,20 @@ const ChatBox = ({ activePage, goToBack }) => {
   if (!selectedChat?._id) {
     return (
       <div
-        className={`w-full flex justify-center items-center text-slate-700 text-xl h-screen text-center dark:text-slate-200 bg-gradient-to-br from-indigo-500/15 via-blue-500/15 to-cyan-400/20 dark:from-slate-950 dark:via-blue-950/40 dark:to-slate-900 ${activePage === "chatbox" ? "block" : "hidden md:flex"}`}
+        className={`w-full h-full flex-col justify-center items-center gap-2 text-center dark:bg-slate-900 ${
+          activePage === "chatbox" ? "flex" : "hidden md:flex"
+        }`}
       >
-        Select a chat to start conservation
+        <p className="text-lg font-medium text-slate-600 dark:text-slate-300">
+          Select a chat to start the conversation
+        </p>
       </div>
     );
   }
 
   return (
     <div
-      className={`h-full w-full flex flex-col bg-gradient-to-br from-indigo-500/15 via-blue-500/15 to-cyan-400/2 dark:from-slate-950 dark:via-blue-950/40 dark:to-slate-900 transition-all duration-300 ${
+      className={`flex-1 h-full min-w-0 flex-col bg-white dark:bg-slate-900 transition-all duration-300 ${
         activePage === "chatbox" ? "flex" : "hidden md:flex"
       }`}
     >
@@ -83,7 +87,9 @@ const ChatBox = ({ activePage, goToBack }) => {
 
       <div className="px-4 py-5 flex-1 overflow-y-auto min-h-0">
         {loading ? (
-          <Loader textColor={"text-indigo-500"} />
+          <div className="flex h-full items-center justify-center">
+            <Loader textColor="text-indigo-500" />
+          </div>
         ) : (
           <ChatMessage messages={filteredMessages} search={search} />
         )}

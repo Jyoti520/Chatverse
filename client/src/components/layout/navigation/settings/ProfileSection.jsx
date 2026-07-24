@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import SettingSection from "./SettingSection";
 import Avatar from "../../../common/Avatar";
 import { useAuth } from "../../../../hooks/useAuth";
+import { formatUserName } from "../../../../utils/format";
 
 function ProfileSection() {
   const { loggeduser } = useAuth();
@@ -14,10 +15,9 @@ function ProfileSection() {
         {/* chnages have to be done   */}
         <div className="flex-1 space-y-2">
           <h1 className="text-lg font-medium p-1 text-slate-900 dark:text-slate-100">
-            {loggeduser?.username?.charAt(0)?.toUpperCase() +
-              loggeduser?.username?.slice(1) || "Deleted"}
+            {formatUserName(loggeduser?.username)}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 w-full">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
             {loggeduser?.email}
           </p>
         </div>

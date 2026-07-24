@@ -1,6 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "../../common/Button";
-import { ArrowLeft, MenuIcon, Moon, MoreHorizontal, Search, X } from "lucide-react";
+import {
+  ChevronLeft,
+  MenuIcon,
+  Moon,
+  MoreVertical,
+  Search,
+  X,
+} from "lucide-react";
 import MessageOptions from "./MessageOptions";
 import Avatar from "../../common/Avatar";
 import Input from "../../common/Input";
@@ -46,9 +53,8 @@ function ChatHeader({ goToBack, search, setSearch }) {
   return (
     <>
       {/* Header Bar */}
-      <div className="bg-white shadow-[0_1px_0_0_rgba(15,23,42,0.06)] dark:bg-slate-900 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.06)]">
-
-        <nav className="flex items-center justify-between gap-3 px-4 py-3.5 sm:px-6 ">
+      <div className="border-b border-slate-200 dark:border-white/[0.07]">
+        <nav className="flex items-center justify-between gap-3 px-4 py-3.5 sm:px-8 ">
           {/* left section */}
 
           <div
@@ -65,7 +71,7 @@ function ChatHeader({ goToBack, search, setSearch }) {
               className="flex md:hidden rounded-xl justify-center items-center w-9 h-9 sm:h-11 sm:w-11 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-all duration-300 cursor-pointer"
               onClick={goToBack}
             >
-              <ArrowLeft size={18} />
+              <ChevronLeft size={20} />
             </button>
 
             {/* Sender chatname */}
@@ -98,34 +104,39 @@ function ChatHeader({ goToBack, search, setSearch }) {
           <div
             className={`${showSearchbar ? "flex-1" : "shrink-0"} flex items-center justify-center gap-2 `}
           >
-           {showSearchbar && <Input
-              className={`relative border-0 backdrop-blur-xl bg-slate-100 dark:bg-white/5 px-4 py-2 rounded-xl focus:ring-2 focus:ring-indigo-500/40 dark:focus:ring-indigo-500/30 transition-all`}
-              placeholder="Search Conversation..."
-              aria-label="Search Messages..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />}
+            {showSearchbar && (
+              <Input
+                className={`relative border-0 backdrop-blur-xl bg-slate-100 dark:bg-white/5 px-4 py-2 rounded-xl focus:ring-2 focus:ring-indigo-500/40 dark:focus:ring-indigo-500/30 transition-all duration-200`}
+                placeholder="Search Conversation..."
+                aria-label="Search Messages..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            )}
             <button
-              className="w-9 h-9 flex justify-center items-center rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 transition-colors duration-300"
-              onClick={() => (showSearchbar ? closeSearch() : setShowSearchbar(true))}
+              className="w-9 h-9 flex justify-center items-center rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-indigo-500 dark:text-indigo-400 transition-colors duration-300"
+              onClick={() =>
+                showSearchbar ? closeSearch() : setShowSearchbar(true)
+              }
               aria-label={showSearchbar ? "Close search" : "Search messages"}
             >
-              {showSearchbar ? <X size={18} /> : <Search size={18} />}
-
-
+              {showSearchbar ? (
+                <X size={20} className="text-red-500 dark:text-red-400" />
+              ) : (
+                <Search size={20} />
+              )}
             </button>
-               {!showSearchbar && (
+            {!showSearchbar && (
               <button
                 type="button"
                 aria-label="More options"
                 onClick={() => setShowMenu(!showMenu)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-indigo-500 transition-colors hover:bg-slate-100 dark:text-indigo-400 dark:hover:bg-white/10"
               >
-                <MoreHorizontal size={18} />
+                <MoreVertical size={20} />
               </button>
             )}
           </div>
-      
         </nav>
       </div>
 

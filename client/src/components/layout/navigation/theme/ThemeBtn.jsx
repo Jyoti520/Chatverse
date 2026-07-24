@@ -5,13 +5,18 @@ function ThemeBtn() {
   const { theme, toggleTheme } = useTheme();
   return (
     <button
-      className="relative flex justify-center items-center h-10 w-10 sm:w-12 sm:h-12 mx-auto bg-white hover:bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-700 dark:text-slate-200  shadow-sm shadow-slate-200/70 dark:shadow-none transition-all hover:scale-[1.03] active:scale-90 duration-300 text-center font-medium rounded-2xl"
-      onClick={toggleTheme}
+      className="relative flex items-center justify-center h-9 w-9 rounded-xl
+        text-slate-500 dark:text-slate-400
+        hover:bg-black/[0.05] dark:hover:bg-white/[0.06]
+        hover:text-slate-700 dark:hover:text-slate-200
+        active:scale-95 transition-all duration-150"
+        onClick={toggleTheme}
+      aria-label="Toggle theme"
     >
       {theme === "dark" ? (
-        <Sun className="w-5 h-5 text-yellow-300" />
+        <Sun className="w-5 h-5 text-yellow-400 fill-yellow-500" />
       ) : (
-        <Moon className="w-5 h-5 text-indigo-600" />
+        <Moon className="w-5 h-5 text-indigo-500 fill-indigo-500" />
       )}
     </button>
   );

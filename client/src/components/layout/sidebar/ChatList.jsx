@@ -28,7 +28,7 @@ function ChatList({ chat, index, handleChat }) {
     chat && (
       <>
         <div
-          className="group px-4 py-3 mx-2 my-1 hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all duration-300 cursor-pointer animate-slidein rounded-2xl "
+          className="group px-4 py-3 mx-2 my-1 hover:bg-indigo-50 dark:hover:bg-white/[0.03] transition-all duration-300 cursor-pointer animate-slidein rounded-2xl "
           style={{ animationDelay: `${index * 0.08}s` }}
           onClick={handleChat}
           aria-roledescription="open chat"
@@ -36,7 +36,7 @@ function ChatList({ chat, index, handleChat }) {
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
             {/* user avatar */}
             <button
-              className={`relative h-10 w-10 sm:h-11 sm:w-11 flex justify-center items-center text-white rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400 text-sm font-semibold transition-all duration-300  shadow-sm shadow-indigo-500/20 dark:shadow-none`}
+              className={`relative h-9 w-9 sm:h-10 sm:w-10 flex justify-center items-center text-white rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-sm font-medium transition-all duration-300 shadow-sm shadow-indigo-500/20 dark:shadow-none`}
             > 
             {/* status badge */}
               {isOnline && (
