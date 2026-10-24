@@ -37,7 +37,7 @@
 
 ## 🌐 Live Demo
 
-📺 Live Link: [Chatverse](https://chatverse-real-time-app.vercel.app)
+📺 Live Link: [Chatverse](https://chatverse-live.vercel.app)
 
 ---
 
